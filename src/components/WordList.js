@@ -3,7 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { words } from 'popular-english-words';
 import MyListItem from './MyListItem';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -40,12 +40,26 @@ export default function WordList({ navigation }) {
 
   return (
     <>
-      <Button
-        title="Go to Saved Suggestions"
-        onPress={() => navigation.navigate('Saved Suggestions')}
-      />
       <SafeAreaProvider>
         <View style={styles.container}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
+            <View style={{ flex: 20 }}></View>
+            <Icon
+              name="bars"
+              type="font-awesome"
+              color="#000"
+              onPress={() => {
+                navigation.navigate('Saved Suggestions');
+              }}
+            />
+            <View style={{ flex: 1 }}></View>
+          </View>
+
           <FlatList
             keyExtractor={(item) => item.id}
             onEndReachedThreshold={1}
@@ -60,6 +74,6 @@ export default function WordList({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: 20,
   },
 });
